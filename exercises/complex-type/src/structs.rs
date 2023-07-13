@@ -5,7 +5,7 @@
 struct Person {
     name: String,
     age: u8,
-    hobby: String
+    hobby: String,
 }
 fn exercise1() -> Person {
     let age = 30;
@@ -13,7 +13,7 @@ fn exercise1() -> Person {
     let p = Person {
         name: String::from("sunface"),
         age,
-        hobby: String::from("Rust")
+        hobby: String::from("Rust"),
     };
 
     p
@@ -39,12 +39,12 @@ impl Agent {
 
     // Get the name of the person
     fn get_name(&self) -> &str {
-        todo!()
+        &self.name
     }
 
     // Get the age of the person
     fn get_age(&self) -> u32 {
-        todo!()
+        self.age
     }
 }
 
@@ -53,7 +53,7 @@ impl Agent {
 // Make it compile
 // Run test
 struct Calculator {
-    value: i32,
+    value: i64,
 }
 
 impl Calculator {
@@ -61,18 +61,18 @@ impl Calculator {
         Calculator { value: 0 }
     }
 
-    fn add(&self, num: i32) {
+    fn add(&mut elf, num: i64) {
         self.value += num;
     }
 
-    fn subtract(mut self, num: i32) {
+    fn subtract(&mut self, num: i64) {
         self.value -= num;
     }
-    fn clear(self) {
+    fn clear(&mut self) {
         self.value = 0;
     }
 
-    fn get_value(self) -> i32 {
+    fn get_value(&self) -> i64 {
         self.value
     }
 }
@@ -95,7 +95,8 @@ fn exercise4() {
 
     let u2 = User {
         first: String::from("Mary"),
-        ..u1
+        last: u1.last.clone(),
+        age: u1.age,
         
     };
 
@@ -122,10 +123,13 @@ fn exercise5() {
     });
 
     
-    let moved = foos[0];
+    let moved = foos[0].clone();
+
 
     
-    let moved_field = foos[0].str_val;
+    //let moved_field = foos[0].str_val;
+    let moved_field = moved.str_val;
+
 }
 
 // Exercise 6
@@ -153,12 +157,15 @@ impl Package {
         }
     }
 
-    fn is_international(&self) -> ??? {
+    fn is_international(&self) -> bool {
         // Something goes here...
+        self.sender_country != self.recipient_country
+}
     }
 
-    fn get_fees(&self, cents_per_gram: i32) -> ??? {
+    fn get_fees(&self, cents_per_gram: i32) -> i32 {
         // Something goes here...
+        self.weight_in_grams * cents_per_gram
     }
 }
 
